@@ -36,7 +36,7 @@ class DynamoDB {
 	 * @param {string} table - The name of the DynamoDB table.
 	 * @param {Object} item - The item to store in the table.
 	 * @param {string|null} condition - Optional condition expression for conditional writes.
-	 * @returns {Object} - The item that was successfully added to the table.
+	 * @returns {Promise<Object>} - The item that was successfully added to the table.
 	 * @throws {HttpError} - Throws HttpError if there is an error or the item already exists.
 	 */
 	async set(table, item, condition = null) {
@@ -70,7 +70,7 @@ class DynamoDB {
 	 *
 	 * @param {string} table - The name of the DynamoDB table.
 	 * @param {Object} keys - The keys to identify the item in the table.
-	 * @returns {Object} - The item retrieved from the table.
+	 * @returns {Promise<Object>} - The item retrieved from the table.
 	 * @throws {HttpError} - Throws HttpError if the item does not exist.
 	 */
 	async get(table, keys) {
@@ -103,7 +103,7 @@ class DynamoDB {
 	 * @param {string} table - The name of the DynamoDB table.
 	 * @param {Array} keys - An array of keys to identify the items in the table.
 	 * @param {string|null} projection - Optional projection expression to specify which attributes to retrieve.
-	 * @returns {Array} - An array of items retrieved from the table.
+	 * @returns {Promise<Array>} - An array of items retrieved from the table.
 	 * @throws {HttpError} - Throws HttpError if there is an error retrieving the items.
 	 */
 	async batchGet(table, keys, projection = null) {
@@ -143,7 +143,7 @@ class DynamoDB {
 	 *
 	 * @param {string} table - The name of the DynamoDB table.
 	 * @param {Array} requests - A list of request objects containing the items to be written.
-	 * @returns {Object} - The result of the batch write operation.
+	 * @returns {Promise<Object>} - The result of the batch write operation.
 	 * @throws {HttpError} - Throws HttpError if there is an error writing the items.
 	 */
 	async batchWrite(table, requests) {
@@ -182,7 +182,7 @@ class DynamoDB {
 	 * @param {Object} expressionAttributeValues - A mapping of values for the update expression.
 	 * @param {string|null} condition - Optional condition expression for conditional updates.
 	 * @param {string} returnValues - What values to return after the update (e.g., 'ALL_NEW').
-	 * @returns {Object} - The result of the update operation, including updated item values.
+	 * @returns {Promise<Object>} - The result of the update operation, including updated item values.
 	 * @throws {HttpError} - Throws HttpError if there is an error updating the item.
 	 */
 	async update(table, keys, updateExpression, expressionAttributeNames, expressionAttributeValues, condition = null, returnValues = 'ALL_NEW') {
@@ -219,7 +219,7 @@ class DynamoDB {
 	 * @param {string} table - The name of the DynamoDB table.
 	 * @param {Object} keys - The keys to identify the item to delete.
 	 * @param {string|null} condition - Optional condition expression for conditional delete.
-	 * @returns {Object} - The keys of the item that was deleted.
+	 * @returns {Promise<Object>} - The keys of the item that was deleted.
 	 * @throws {HttpError} - Throws HttpError if there is an error deleting the item.
 	 */
 	async delete(table, keys, condition = null) {
@@ -255,7 +255,7 @@ class DynamoDB {
 	 * @param {string|null} [filter=null] - Optional. A FilterExpression to apply additional filtering on the results.
 	 * @param {Object|null} [filterValues=null] - Optional. A dictionary of filter values to be used in the FilterExpression.
 	 *
-	 * @returns {Array} - An array of items returned from the query that match the conditions and filters.
+	 * @returns {Promise<Array>} - An array of items returned from the query that match the conditions and filters.
 	 *
 	 * @throws {HttpError} - Throws an error if the query operation fails.
 	 */
@@ -308,7 +308,7 @@ class DynamoDB {
 	 * @param {string|null} [filter=null] - Optional. A FilterExpression to apply additional filtering on the results.
 	 * @param {Object|null} [filterValues=null] - Optional. A dictionary of filter values to be used in the FilterExpression.
 	 *
-	 * @returns {Array} - An array of items returned from the query that match the conditions and filters.
+	 * @returns {Promise<Array>} - An array of items returned from the query that match the conditions and filters.
 	 *
 	 * @throws {HttpError} - Throws an error if the query operation fails.
 	 */
@@ -355,7 +355,7 @@ class DynamoDB {
 	 * @param {Object|null} [filterValues=null] - Optional. A dictionary of filter values to be used in the FilterExpression.
 	 * @param {string|null} [projection=null] - Optional. A ProjectionExpression to specify which attributes to retrieve.
 	 *
-	 * @returns {Array} - An array of items returned from the scan that match the conditions and filters.
+	 * @returns {Promise<Array>} - An array of items returned from the scan that match the conditions and filters.
 	 *
 	 * @throws {HttpError} - Throws an error if the scan operation fails.
 	 */
